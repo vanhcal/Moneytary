@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Date"
+        android:id="@+id/setDateButton"
+        android:layout_gravity="bottom"
+        android:onClick="setDate"
+        android:layout_alignTop="@+id/sendButton"
+        android:layout_alignStart="@+id/editTags" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_send"
+        android:onClick="sendMessage"
+        android:layout_gravity="bottom"
+        android:id="@+id/sendButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/enterValue"
+        android:layout_marginBottom="192dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:hint="Enter value"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/enterValue"
+        android:layout_above="@+id/setDateButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp" />
+
+    <MultiAutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTags"
+        android:layout_above="@+id/setDateButton"
+        android:layout_alignStart="@+id/enterValue"
+        android:layout_alignEnd="@+id/sendButton"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="Enter tags" />
+
+</RelativeLayout>
