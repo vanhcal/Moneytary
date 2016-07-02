@@ -21,29 +21,21 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);
+        String monthTotal = intent.getStringExtra(MyActivity.MONTH_TOTAL);
 
         TextView textView = new TextView(this);
 
         textView.setTextSize(40);
-        textView.setText(message);
+        textView.setText(monthTotal);
 
-        CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.content);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.content);
         layout.addView(textView);
 
         displayText = (TextView) findViewById(R.id.printedText);
-        displayText.setText("HELLO");
+        displayText.setText(monthTotal);
 
     }
 

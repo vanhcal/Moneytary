@@ -13,7 +13,8 @@
         android:layout_gravity="bottom"
         android:onClick="setDate"
         android:layout_alignTop="@+id/sendButton"
-        android:layout_alignStart="@+id/editTags" />
+        android:layout_alignStart="@+id/editTags"
+        android:layout_marginBottom="49dp"/>
 
     <Button
         android:layout_width="wrap_content"

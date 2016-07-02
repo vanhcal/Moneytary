@@ -25,16 +25,15 @@ import java.util.Calendar;
 
 
 public class MyActivity extends FragmentActivity {
-    public final static String EXTRA_MESSAGE = "com.example.van.myfirstapp.MESSAGE";
+    public final static String MONTH_TOTAL = null;
     static ArrayAdapter<String> adapter;
     static ArrayList<String> allTags = new ArrayList<>();
 
     DatabaseHelper databaseHelper;
     EditText valueEntered, tagsEntered;
-    TextView displayText;
 
     Button setDate;
-    int year, month, currentMonth, day;
+    int year, month, day;
     static final int dialogId = 0;
     String datePicked;
 
@@ -65,7 +64,6 @@ public class MyActivity extends FragmentActivity {
         final Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
-        currentMonth = month;
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
 
@@ -172,8 +170,7 @@ public class MyActivity extends FragmentActivity {
         if (allFieldsCompleted) {
             // This starts the next activity, which includes the part where the value is printed top-left
             Intent intent = new Intent(this, DisplayMessageActivity.class);
-            String valueString = valueEntered.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, valueString);
+            intent.putExtra(MONTH_TOTAL, "You have spent $" + getTotalForMonth() + " this month.");
             startActivity(intent);
 
             // Get individual tags entered
@@ -209,9 +206,10 @@ public class MyActivity extends FragmentActivity {
             // If we successfully insert into the databaseHelper, toast how much we've spent
             boolean isInserted = databaseHelper.insertData(valueEntered.getText().toString(), tagsEntered.getText().toString(), datePicked);
             if (isInserted) {
+                String valueString = valueEntered.getText().toString();
                 Toast.makeText(this.getBaseContext(), "You have spent $" + valueString + " on " + sb.toString(), Toast.LENGTH_LONG).show();
             }
-            //getTotalForMonth();
+            getTotalForMonth();
             getTotalForYear();
             getValuePerTag(inputedTags);
 
