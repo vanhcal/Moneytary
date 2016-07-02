@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Statement;
@@ -29,6 +31,7 @@ public class MyActivity extends FragmentActivity {
 
     DatabaseHelper databaseHelper;
     EditText valueEntered, tagsEntered;
+    TextView displayText;
 
     Button setDate;
     int year, month, currentMonth, day;
@@ -41,10 +44,10 @@ public class MyActivity extends FragmentActivity {
         setContentView(R.layout.activity_my);
         databaseHelper = new DatabaseHelper(this);
 
+
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, allTags);
 
-        //TODO
         allTags = populateArray(databaseHelper);
 
         for (int d = 0; d < allTags.size(); d++) {
@@ -65,6 +68,8 @@ public class MyActivity extends FragmentActivity {
         currentMonth = month;
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
+
+
     }
 
     public ArrayList<String> populateArray (DatabaseHelper helper) {
@@ -206,9 +211,13 @@ public class MyActivity extends FragmentActivity {
             if (isInserted) {
                 Toast.makeText(this.getBaseContext(), "You have spent $" + valueString + " on " + sb.toString(), Toast.LENGTH_LONG).show();
             }
-            getTotalForMonth();
+            //getTotalForMonth();
             getTotalForYear();
             getValuePerTag(inputedTags);
+
+
+
+
         }
         // If not all fields are completed, toast the appropriate error messages.
         else {
@@ -223,15 +232,17 @@ public class MyActivity extends FragmentActivity {
         }
     }
 
-    public void getTotalForMonth() {
+    public String getTotalForMonth() {
         // Total amount spent this month
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select sum(expenseValue) from expenses_table where substr(date,6,2) == strftime('%m','now')", null);
+        String string = null;
         while(cursor.moveToNext()) {
-            String string = cursor.getString(0);
+            string = cursor.getString(0);
             System.out.println("MONTH SUM " + string);
         }
         cursor.close();
+        return string;
 
 
         // getting all values that have boba: select sum(expenseValue) from expenses_table where tags like '%boba%'
