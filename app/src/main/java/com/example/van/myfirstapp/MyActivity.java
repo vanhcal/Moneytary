@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,7 +31,7 @@ public class MyActivity extends FragmentActivity {
     EditText valueEntered, tagsEntered;
 
     Button setDate;
-    int year, month, day;
+    int year, month, currentMonth, day;
     static final int dialogId = 0;
     String datePicked;
 
@@ -60,6 +62,7 @@ public class MyActivity extends FragmentActivity {
         final Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
+        currentMonth = month;
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
     }
@@ -203,6 +206,9 @@ public class MyActivity extends FragmentActivity {
             if (isInserted) {
                 Toast.makeText(this.getBaseContext(), "You have spent $" + valueString + " on " + sb.toString(), Toast.LENGTH_LONG).show();
             }
+            getTotalForMonth();
+            getTotalForYear();
+            getValuePerTag(inputedTags);
         }
         // If not all fields are completed, toast the appropriate error messages.
         else {
@@ -214,6 +220,49 @@ public class MyActivity extends FragmentActivity {
                 }
             }
             Toast.makeText(this.getBaseContext(), sb.toString(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void getTotalForMonth() {
+        // Total amount spent this month
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select sum(expenseValue) from expenses_table where substr(date,6,2) == strftime('%m','now')", null);
+        while(cursor.moveToNext()) {
+            String string = cursor.getString(0);
+            System.out.println("MONTH SUM " + string);
+        }
+        cursor.close();
+
+
+        // getting all values that have boba: select sum(expenseValue) from expenses_table where tags like '%boba%'
+        // select sum(expenseValue)
+        //from expenses_table
+        //where substr(date, 6, 2) =  strftime('%m','now', '-1 month') -- last month
+        //SELECT * FROM expenses_table WHERE date >= date('now', 'start of month')
+        //SELECT * FROM expenses_table WHERE date > date('now', 'start of month')
+        //insert into expenses_table(expenseid, expensevalue, tags, date) values (18, 25, 'Boba', '2016-07-01')
+        // select sum(expenseValue) from expenses_table where tags like '%boba%' and substr(date,6,2) ==strftime('%m','now', '-1 month')
+    }
+    public void getTotalForYear() {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select sum(expenseValue) from expenses_table where substr(date,1,4) == strftime('%Y','now')", null);
+        while(cursor.moveToNext()) {
+            String string = cursor.getString(0);
+            System.out.println("YEAR SUM " + string);
+        }
+        cursor.close();
+    }
+    public void getValuePerTag(String [] inputedTags) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        for (int i = 0; i < inputedTags.length; i++) {
+            String tag = inputedTags[i];
+            Cursor cursor = sqLiteDatabase.rawQuery("select sum(expenseValue) from expenses_table " +
+                    "where tags like '%" + tag + "%' and substr(date,6,2) == strftime('%m','now')", null);
+            while(cursor.moveToNext()) {
+                String amount = cursor.getString(0);
+                System.out.println("You have spent $" + amount + " on " + tag + " this month.");
+            }
+            cursor.close();
         }
     }
 }
