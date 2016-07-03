@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -14,18 +13,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
 
 public class MyActivity extends FragmentActivity {
-    public final static String MONTH_TOTAL = null;
     static ArrayAdapter<String> adapter;
     static ArrayList<String> allTags = new ArrayList<>();
 
@@ -37,12 +31,13 @@ public class MyActivity extends FragmentActivity {
     static final int dialogId = 0;
     String datePicked;
 
+    String [] inputedTags;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         databaseHelper = new DatabaseHelper(this);
-
 
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, allTags);
@@ -66,8 +61,6 @@ public class MyActivity extends FragmentActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
-
-
     }
 
     public ArrayList<String> populateArray (DatabaseHelper helper) {
@@ -168,14 +161,9 @@ public class MyActivity extends FragmentActivity {
         }
 
         if (allFieldsCompleted) {
-            // This starts the next activity, which includes the part where the value is printed top-left
-            Intent intent = new Intent(this, DisplayMessageActivity.class);
-            intent.putExtra(MONTH_TOTAL, "You have spent $" + getTotalForMonth() + " this month.");
-            startActivity(intent);
-
             // Get individual tags entered
             String tags = tagsEntered.getText().toString();
-            String[] inputedTags = tags.split(",");
+            inputedTags = tags.split(",");
 
             // If a tag is not found, add it to the Tags array
             for (int i = 0; i < inputedTags.length; i++) {
@@ -209,14 +197,15 @@ public class MyActivity extends FragmentActivity {
                 String valueString = valueEntered.getText().toString();
                 Toast.makeText(this.getBaseContext(), "You have spent $" + valueString + " on " + sb.toString(), Toast.LENGTH_LONG).show();
             }
-            getTotalForMonth();
-            getTotalForYear();
-            getValuePerTag(inputedTags);
 
-
-
-
+            //Start the next activity
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("key", getStringsToPrint());
+            Intent intent = new Intent(this, DisplayMessageActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
+
         // If not all fields are completed, toast the appropriate error messages.
         else {
             StringBuilder sb = new StringBuilder();
@@ -241,28 +230,23 @@ public class MyActivity extends FragmentActivity {
         }
         cursor.close();
         return string;
-
-
-        // getting all values that have boba: select sum(expenseValue) from expenses_table where tags like '%boba%'
-        // select sum(expenseValue)
-        //from expenses_table
-        //where substr(date, 6, 2) =  strftime('%m','now', '-1 month') -- last month
-        //SELECT * FROM expenses_table WHERE date >= date('now', 'start of month')
-        //SELECT * FROM expenses_table WHERE date > date('now', 'start of month')
-        //insert into expenses_table(expenseid, expensevalue, tags, date) values (18, 25, 'Boba', '2016-07-01')
-        // select sum(expenseValue) from expenses_table where tags like '%boba%' and substr(date,6,2) ==strftime('%m','now', '-1 month')
     }
-    public void getTotalForYear() {
+
+    public String getTotalForYear() {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select sum(expenseValue) from expenses_table where substr(date,1,4) == strftime('%Y','now')", null);
+        String string = null;
         while(cursor.moveToNext()) {
-            String string = cursor.getString(0);
+            string = cursor.getString(0);
             System.out.println("YEAR SUM " + string);
         }
         cursor.close();
+        return string;
     }
-    public void getValuePerTag(String [] inputedTags) {
+
+    public ArrayList<String> getValuePerTag(String [] inputedTags) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        ArrayList<String> localArray = new ArrayList<>();
         for (int i = 0; i < inputedTags.length; i++) {
             String tag = inputedTags[i];
             Cursor cursor = sqLiteDatabase.rawQuery("select sum(expenseValue) from expenses_table " +
@@ -270,9 +254,23 @@ public class MyActivity extends FragmentActivity {
             while(cursor.moveToNext()) {
                 String amount = cursor.getString(0);
                 System.out.println("You have spent $" + amount + " on " + tag + " this month.");
+                localArray.add("You have spent $" + amount + " on " + tag + " this month.");
             }
             cursor.close();
         }
+        return localArray;
+    }
+
+    public ArrayList<String> getStringsToPrint() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("You have spent $" + getTotalForMonth() + " this month.");
+        arrayList.add("You have spent $" + getTotalForYear() + " this year.");
+
+        ArrayList<String> tagStatements = getValuePerTag(inputedTags);
+        for (int i = 0; i < tagStatements.size(); i++) {
+            arrayList.add(tagStatements.get(i));
+        }
+        return arrayList;
     }
 }
 

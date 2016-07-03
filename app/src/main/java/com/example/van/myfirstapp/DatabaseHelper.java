@@ -2,18 +2,8 @@ package com.example.van.myfirstapp;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.nfc.Tag;
-import android.text.Html;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.sql.DatabaseMetaData;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Van on 6/22/2016.
@@ -51,7 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         System.out.println("Tables updating.");
         db.execSQL("DROP TABLE IF EXISTS " + expensesTable);
         db.execSQL("DROP TABLE IF EXISTS " + tagsTable);
-
         onCreate(db);
     }
 
@@ -82,8 +71,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-
-
-
-
 }

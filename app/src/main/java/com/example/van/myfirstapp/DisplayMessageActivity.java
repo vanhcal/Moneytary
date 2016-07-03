@@ -2,14 +2,11 @@ package com.example.van.myfirstapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import java.util.ArrayList;
 
 public class DisplayMessageActivity extends AppCompatActivity {
     TextView displayText;
@@ -24,19 +21,20 @@ public class DisplayMessageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        String monthTotal = intent.getStringExtra(MyActivity.MONTH_TOTAL);
+        Bundle bundle = this.getIntent().getExtras();
+        ArrayList<String> array = bundle.getStringArrayList("key");
 
         TextView textView = new TextView(this);
-
         textView.setTextSize(40);
-        textView.setText(monthTotal);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.content);
         layout.addView(textView);
 
         displayText = (TextView) findViewById(R.id.printedText);
-        displayText.setText(monthTotal);
-
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < array.size(); i++) {
+            sb.append(array.get(i) + "\n" + "\n");
+        }
+        displayText.setText(sb.toString());
     }
-
 }
