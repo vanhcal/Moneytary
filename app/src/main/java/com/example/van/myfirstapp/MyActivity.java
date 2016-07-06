@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +27,7 @@ public class MyActivity extends FragmentActivity {
 
     DatabaseHelper databaseHelper;
     EditText valueEntered, tagsEntered;
+    TextView greeting;
 
     Button setDate;
     int year, month, day;
@@ -61,6 +64,9 @@ public class MyActivity extends FragmentActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDialogOnButtonClick();
+
+        greeting = (TextView) findViewById(R.id.helloText);
+        greeting.setText("\"Hello! What expense would you like to record today?\"");
     }
 
     public ArrayList<String> populateArray (DatabaseHelper helper) {
@@ -135,11 +141,12 @@ public class MyActivity extends FragmentActivity {
 
         // Get the value entered, translate to string, parse into int
         valueEntered = (EditText) findViewById(R.id.enterValue);
+
         String string = valueEntered.getText().toString().trim();
-        int value;
+        double value;
         // Remember: when parsing anything, to catch exceptions
         try {
-            value = Integer.parseInt(valueEntered.getText().toString());
+            value = Double.parseDouble(valueEntered.getText().toString());
         } catch (NumberFormatException e) {
             value = -1;
         }

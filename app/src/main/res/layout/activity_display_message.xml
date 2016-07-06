@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/content"
+    android:background="@drawable/redwallpaper"
     tools:context="com.example.van.myfirstapp.DisplayMessageActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -27,13 +28,46 @@
     <TextView
         android:layout_width="800px"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
         android:id="@+id/printedText"
-        android:layout_marginTop="152dp"
-        android:layout_below="@+id/view"
         android:ellipsize="none"
         android:scrollHorizontally="false"
-        android:layout_centerHorizontal="true" />
+        android:textColor="#FFFFFF"
+        android:layout_above="@+id/newCharge"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginBottom="31dp" />
+
+    <Button
+        android:background="@drawable/coloredbutton"
+        android:textColor="@drawable/buttontextcolor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Another Charge"
+        android:id="@+id/newCharge"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="31dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/unhappy"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:maxWidth="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/bubbleSpeech"
+        android:layout_marginTop="104dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/view"
+        android:layout_alignEnd="@+id/printedText" />
 
 </RelativeLayout>

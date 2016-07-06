@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/redwallpaper"
     android:id="@+id/relativeLayout">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set Date"
-        android:id="@+id/setDateButton"
-        android:layout_gravity="bottom"
-        android:onClick="setDate"
-        android:layout_alignTop="@+id/sendButton"
-        android:layout_alignStart="@+id/editTags"
-        android:layout_marginBottom="49dp"/>
-
-    <Button
+        android:background="@drawable/coloredbutton"
+        android:textColor="@drawable/buttontextcolor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_send"
@@ -27,16 +19,32 @@
         android:layout_alignEnd="@+id/enterValue"
         android:layout_marginBottom="192dp" />
 
+    <Button
+        android:background="@drawable/coloredbutton"
+        android:textColor="@drawable/buttontextcolor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Date"
+        android:id="@+id/setDateButton"
+        android:onClick="setDate"
+        android:layout_alignTop="@+id/sendButton"
+        android:layout_alignStart="@+id/editTags"
+        android:layout_marginBottom="49dp"/>
+
     <EditText
         android:layout_width="wrap_content"
-        android:hint="Enter value"
+        android:hint="Enter $ value"
+        android:textColor="#FFFFFF"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/enterValue"
         android:layout_above="@+id/setDateButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp" />
+        android:layout_marginBottom="49dp"
+        android:textColorHint="#FFFFFF"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="@android:color/holo_red_light" />
 
     <MultiAutoCompleteTextView
         android:layout_width="wrap_content"
@@ -47,6 +55,38 @@
         android:layout_alignEnd="@+id/sendButton"
         android:singleLine="true"
         android:imeOptions="actionDone"
-        android:hint="Enter tags" />
+        android:textColorHint="#FFFFFF"
+        android:hint="Enter tags"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@android:color/holo_red_light"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainGraphic"
+        android:src="@drawable/finished2"
+        android:layout_alignBottom="@+id/enterValue"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:maxWidth="200dp"
+        android:layout_marginTop="134dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/helloText"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/setDateButton" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:src="@drawable/logo2"
+        android:layout_below="@+id/enterValue"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="38dp" />
 
 </RelativeLayout>
