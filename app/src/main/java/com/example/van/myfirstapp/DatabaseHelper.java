@@ -24,11 +24,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, database, null, 1);
     }
 
-    private static final String createExpensesTable = "CREATE TABLE IF NOT EXIST " +
+    private static final String createExpensesTable = "CREATE TABLE IF NOT EXISTS " +
             expensesTable + "(" + idColumn + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             valueColumn + " DOUBLE, " + tagsColumn + " TEXT, " + dateColumn + " TEXT " + ");";
 
-    private static final String createTagsTable = "CREATE TABLE IF NOT EXIST " + tagsTable + "(" + allTagsColumn + " TEXT" + ");";
+    private static final String createTagsTable = "CREATE TABLE IF NOT EXISTS " + tagsTable + "(" + allTagsColumn + " TEXT" + ");";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
