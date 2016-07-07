@@ -6,15 +6,17 @@
         <item name="colorPrimary">@color/colorRed</item>
         <item name="colorPrimaryDark">@color/colorRed</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
+    </style>
 
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorAccent">@color/colorRed</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
-
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
