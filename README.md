@@ -6,7 +6,7 @@ Features:
 -- Responsive layout via 9-patch images
 -- SQLite database that remembers prior purchases and tags
 -- SQL queries that return a summary of expenses
--- Dialog calendar
+-- Custom dialog calendar
 -- Autofill populated by SQLite
 -- Filled field validation and toasts confirming inputs 
 
