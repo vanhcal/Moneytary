@@ -33,12 +33,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         textView.setTextSize(40);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.content);
-        /*
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(30, 40);
-        params.leftMargin = 50;
-        params.topMargin = 60;
-        layout.addView(textView, params);
-        */
+        layout.addView(textView);
 
         bubbleText = (TextView) findViewById(R.id.bubbleSpeech);
         final String[] sayings = {"Aiiiii you cannot spend this much!", "This one time....this one time, I'll allow it.",
