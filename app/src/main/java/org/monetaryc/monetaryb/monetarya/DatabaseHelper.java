@@ -1,4 +1,4 @@
-package com.example.van.myfirstapp;
+package org.monetaryc.monetaryb.monetarya;
 
 import android.content.ContentValues;
 import android.content.Context;

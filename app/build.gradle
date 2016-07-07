@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.example.van.myfirstapp"
+        applicationId "org.monetaryc.monetaryb.monetarya"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1

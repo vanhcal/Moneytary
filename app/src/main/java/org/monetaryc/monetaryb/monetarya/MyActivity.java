@@ -1,4 +1,4 @@
-package com.example.van.myfirstapp;
+package org.monetaryc.monetaryb.monetarya;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.monetaryc.monetaryb.monetarya.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;

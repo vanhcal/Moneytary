@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/content"
-    android:background="@drawable/redwallpaper"
-    tools:context="com.example.van.myfirstapp.DisplayMessageActivity">
+    android:background="@drawable/updatedbackground3"
+    tools:context="org.monetaryc.monetaryb.monetarya.DisplayMessageActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -24,12 +24,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
     <TextView
         android:layout_width="800px"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         android:scrollbarThumbVertical="@drawable/scrollbar"
+        android:fadeScrollbars="false"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/printedText"
@@ -38,7 +38,7 @@
         android:textColor="#FFFFFF"
         android:layout_above="@+id/newCharge"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="255dp"
         android:layout_marginLeft="50dp"
         android:layout_marginBottom="31dp"
         android:maxLines = "100" />
@@ -54,23 +54,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="31dp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/unhappy"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
-        android:maxWidth="380dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="180dp"
+        android:maxWidth="380dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/bubbleSpeech"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:background="@drawable/speechbubble2"
+        android:gravity="center"
+        android:paddingBottom="50dp"
+        android:layout_alignBottom="@+id/printedText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="206dp"
+        android:layout_alignStart="@+id/newCharge" />
 
 </RelativeLayout>
