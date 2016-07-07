@@ -28,6 +28,8 @@
     <TextView
         android:layout_width="800px"
         android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/printedText"
@@ -36,8 +38,10 @@
         android:textColor="#FFFFFF"
         android:layout_above="@+id/newCharge"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginBottom="31dp" />
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="31dp"
+        android:maxLines = "100" />
 
     <Button
         android:background="@drawable/coloredbutton"
@@ -59,15 +63,15 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:maxWidth="200dp"
+        android:maxWidth="380dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="180dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/bubbleSpeech"
-        android:layout_marginTop="104dp"
         android:textColor="#FFFFFF"
-        android:layout_below="@+id/view"
-        android:layout_alignEnd="@+id/printedText" />
+         />
 
 </RelativeLayout>

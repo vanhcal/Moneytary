@@ -69,6 +69,7 @@ public class MyActivity extends FragmentActivity {
         greeting.setText("\"Hello! What expense would you like to record today?\"");
     }
 
+    // Getting SQL tags into the current tags array
     public ArrayList<String> populateArray (DatabaseHelper helper) {
         SQLiteDatabase sqLiteDatabase = helper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from tags_table", null);
@@ -169,7 +170,10 @@ public class MyActivity extends FragmentActivity {
 
         if (allFieldsCompleted) {
             // Get individual tags entered
-            String tags = tagsEntered.getText().toString();
+            String tags = tagsEntered.getText().toString().trim();
+            if (tags.charAt(tags.length() - 1) == ',') {
+                tags = tags.substring(0, tags.length() - 1);
+            }
             inputedTags = tags.split(",");
 
             // If a tag is not found, add it to the Tags array
