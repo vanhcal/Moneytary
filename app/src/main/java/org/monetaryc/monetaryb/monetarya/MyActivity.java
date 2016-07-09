@@ -44,14 +44,10 @@ public class MyActivity extends FragmentActivity {
         setContentView(R.layout.activity_my);
         databaseHelper = new DatabaseHelper(this);
 
-        adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, allTags);
-
         allTags = populateArray(databaseHelper);
 
-        for (int d = 0; d < allTags.size(); d++) {
-            System.out.println("TAGS" + allTags.get(d));
-        }
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, allTags);
 
         adapter.notifyDataSetChanged();
 
@@ -84,6 +80,11 @@ public class MyActivity extends FragmentActivity {
             i++;
         }
         ArrayList<String> tagsList = new ArrayList<>(Arrays.asList(tags));
+
+        for (int j = 0; j < tagsList.size(); j++) {
+            System.out.print("TAGS " + tagsList.get(j) + " ");
+        }
+
         return tagsList;
     }
 
@@ -183,13 +184,13 @@ public class MyActivity extends FragmentActivity {
                 boolean found = false;
                 for (int j = 0; j < allTags.size(); j++) {
                     if (inputedTags[i].trim().equals(allTags.get(j))) {
-                        System.out.println("FOUND" + inputedTags[i] + "/" + allTags.get(j));
+                        System.out.println("FOUND " + inputedTags[i] + "/" + allTags.get(j));
                         found = true;
                         break;
                     }
                 }
                 if (!found) {
-                    System.out.println("NOT FOUND" + inputedTags[i]);
+                    System.out.println("NOT FOUND " + inputedTags[i]);
                     allTags.add(inputedTags[i].trim());
                     adapter.add(inputedTags[i].trim());
                     adapter.notifyDataSetChanged();

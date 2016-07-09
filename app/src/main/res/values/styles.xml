@@ -9,8 +9,19 @@
         <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
     </style>
 
-    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:colorAccent">@color/colorRed</item>
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+        <item name="colorControlNormal">@color/colorRed</item>
+    </style>
+
+    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/colorPrimary</item>
+        <item name="android:calendarTextColor">@color/colorPrimaryDark</item>
+        <item name="android:dayOfWeekBackground">@color/colorPrimaryDark</item>
+        <item name="android:yearListSelectorColor">@color/colorAccent</item>
+        <item name="android:datePickerMode">calendar</item>
+        <item name="colorControlNormal">@color/colorRed</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
