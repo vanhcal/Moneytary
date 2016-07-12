@@ -12,3 +12,5 @@ Features:
 
 Please view:
 http://imgur.com/a/k9rZ7
+
+Moneytary is released on the Google Play store at: https://goo.gl/cSrSg6
