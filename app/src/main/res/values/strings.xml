@@ -5,4 +5,10 @@
     <string name="button_send">Send</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_display_message">New charge</string>
+    <string name="action_share">Share</string>
+    <string name="link_to_tags">See all recent tags</string>
+    <string name="link_to_charges">See all recent expenses</string>
+    <string name="link_to_home">Add a new expense</string>
+    <string name="tags_header">Tags This Month</string>
+    <string name="expenses_header">Recent Expenses</string>
 </resources>

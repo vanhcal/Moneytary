@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DisplayMessageActivity extends AppCompatActivity {
-    TextView displayText, bubbleText;
+    TextView displayText, bubbleText, toAllTags, toAllExpenses;
     private static Button restart;
 
     @Override
@@ -25,10 +25,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_message);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Intent intent = getIntent();
         Bundle bundle = this.getIntent().getExtras();
         ArrayList<String> array = bundle.getStringArrayList("key");
 
@@ -59,6 +57,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         displayText.setMovementMethod(new ScrollingMovementMethod());
 
         onClickButtonListener();
+        twoToTags();
+        twoToExpenses();
     }
 
     // Restart the app so we can add another charge
@@ -69,6 +69,28 @@ public class DisplayMessageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent startIntent = new Intent(view.getContext(), MyActivity.class);
                 startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(startIntent);
+            }
+        });
+    }
+
+    public void twoToTags() {
+        toAllTags = (TextView) findViewById(R.id.homeToAllTags2);
+        toAllTags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent startIntent = new Intent(view.getContext(), AllTags.class);
+                startActivity(startIntent);
+            }
+        });
+    }
+
+    public void twoToExpenses() {
+        toAllExpenses = (TextView) findViewById(R.id.homeToAllCharges2);
+        toAllExpenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent startIntent = new Intent(view.getContext(), AllExpenses.class);
                 startActivity(startIntent);
             }
         });

@@ -82,4 +82,26 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="73dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/homeToAllTags"
+        android:textColor="#FFFFFF"
+        android:text="@string/link_to_tags"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/setDateButton"
+        android:layout_alignEnd="@+id/setDateButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/homeToAllCharges"
+        android:textColor="#FFFFFF"
+        android:text="@string/link_to_charges"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/sendButton"
+        android:layout_alignStart="@+id/sendButton" />
+
 </RelativeLayout>

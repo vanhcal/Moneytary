@@ -70,6 +70,30 @@
         android:layout_alignBottom="@+id/printedText"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="206dp"
-        android:layout_alignStart="@+id/newCharge" />
+        android:layout_alignStart="@+id/newCharge"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/link_to_tags"
+        android:id="@+id/homeToAllTags2"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/printedText"
+        android:layout_alignStart="@+id/printedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/homeToAllCharges2"
+        android:text="@string/link_to_charges"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/homeToAllTags2"
+        android:layout_toEndOf="@+id/homeToAllTags2"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp" />
 
 </RelativeLayout>
