@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/redwallpaper">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32sp"
+        android:text="@string/tags_header"
+        android:id="@+id/allTagsHeader"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/link_to_charges"
+        android:id="@+id/tagsToExpenses"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#FFFFFF"
+        android:layout_above="@+id/tagsToHome"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/link_to_home"
+        android:id="@+id/tagsToHome"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tagsDisplay"
+        android:layout_below="@+id/allTagsHeader"
+        android:paddingTop="20dp"
+        android:textColor="#FFFFFF"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
+        android:fadeScrollbars="false"
+        android:scrollHorizontally="false"
+        android:paddingLeft="30dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/tagsToExpenses" />
+
+</RelativeLayout>
