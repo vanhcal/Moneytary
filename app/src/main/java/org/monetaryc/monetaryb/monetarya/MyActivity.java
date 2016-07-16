@@ -265,6 +265,7 @@ public class MyActivity extends FragmentActivity {
             Cursor cursor = sqLiteDatabase.rawQuery("select sum(expenseValue) from expenses_table " +
                     "where tags like '%" + tag + "%' and substr(date,6,2) == strftime('%m','now')", null);
             while(cursor.moveToNext()) {
+                // 0 refers to Column0 or the fact that this is the only info returned, not index0
                 String amount = cursor.getString(0);
                 System.out.println("You have spent $" + amount + " on " + tag + " this month.");
                 localArray.add("You have spent $" + amount + " on " + tag + " this month.");
