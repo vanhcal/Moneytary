@@ -1,6 +1,6 @@
 # Moneytary
 
-Moneytary is a personal finance app featuring Sally, your secretary who is happy to take note of your expenses but frowns on extravagant spending. Users can input an amount spent, the date the purchase was made, and tag the purchases however they'd like. The app will return how much the user has spent this month, how much they've spent this year, and how much they've spent this month in each category they've just tagged. A "return" button allows the user to return to the main page if they'd like to add more expenses. Meanwhile, Sally can't help but pass commentary on your purchases!
+Moneytary is a personal finance app featuring Sally, your secretary who is happy to take note of your expenses but frowns on extravagant spending. Sally can't help but pass commentary on your purchases. Users can input an amount spent, the date the purchase was made, and tag the purchases however they'd like. The app will return how much the user has spent this month, how much they've spent this year, and how much they've spent this month in each category they've just tagged. A "return" button allows the user to return to the main page if they'd like to add more expenses. Other Activities allow users to see all tags they've used this month, as well as all recent expenses recorded (and delete them if desired).
 
 Features:
 -- Responsive layout via 9-patch images
