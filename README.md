@@ -14,7 +14,7 @@ Features:
 -- Filled field validation and toasts confirming inputs 
 
 Please view:
-http://imgur.com/a/k9rZ7
+http://imgur.com/a/k9rZ7,
 http://imgur.com/a/Fmhhb
 
 Moneytary is released on the Google Play store at: https://goo.gl/cSrSg6
