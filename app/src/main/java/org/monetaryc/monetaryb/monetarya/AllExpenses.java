@@ -1,9 +1,12 @@
 package org.monetaryc.monetaryb.monetarya;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
@@ -20,6 +23,8 @@ public class AllExpenses extends AppCompatActivity {
     TextView restart, expensesToTags;
     ListView listView;
     DatabaseHelper databaseHelper;
+    CustomArrayAdapter customAdapter;
+    ArrayList<String> list, idArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,23 +36,54 @@ public class AllExpenses extends AppCompatActivity {
         expensesToHome();
 
         listView = (ListView) findViewById(R.id.expensesList);
-        ArrayList<String> list = populateRecentChargesArray();
-
-        CustomArrayAdapter customAdapter = new CustomArrayAdapter(list, this);
-
-        //handle listview and assign adapter
+        list = populateRecentChargesArray();
+        customAdapter = new CustomArrayAdapter(list, this);
         listView.setAdapter(customAdapter);
+    }
+
+    public void showAlertDialog(final Context context, int position) {
+        final int pos = position;
+        final String dbId = idArray.get(pos);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this charge?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+                        try {
+                            list.remove(pos);
+                            customAdapter.notifyDataSetChanged();
+                            sqLiteDatabase.execSQL("DELETE FROM expenses_table WHERE ExpenseID = " + dbId);
+                            sqLiteDatabase.close();
+                        }
+                        catch(Exception e) {
+                        }
+                        Intent startIntent = new Intent(context, AllExpenses.class);
+                        startActivity(startIntent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public ArrayList<String> populateRecentChargesArray() {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
         ArrayList<String> localArray = new ArrayList<>();
+        idArray = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from expenses_table order by expenseID desc limit 10", null);
         while(cursor.moveToNext()) {
+            String id = cursor.getString(cursor.getColumnIndex("ExpenseID"));
             String amount = cursor.getString(cursor.getColumnIndex("ExpenseValue"));
             String tags = cursor.getString(cursor.getColumnIndex("Tags"));
             String date = cursor.getString(cursor.getColumnIndex("Date"));
             localArray.add("$" + amount + "\n" + tags + "\n" + date + "\n");
+            idArray.add(id);
         }
         cursor.close();
         return localArray;

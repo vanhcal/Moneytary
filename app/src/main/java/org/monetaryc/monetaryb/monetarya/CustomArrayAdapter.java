@@ -14,12 +14,13 @@ import com.monetaryc.monetaryb.monetarya.R;
 import java.util.ArrayList;
 
 public class CustomArrayAdapter extends BaseAdapter implements ListAdapter {
-    private ArrayList<String> list = new ArrayList<String>();
-    private Context context;
+    private ArrayList<String> list = new ArrayList<>();
+    private Context context, mContext;
 
     public CustomArrayAdapter(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
+        this.mContext = context;
     }
 
     @Override
@@ -35,8 +36,6 @@ public class CustomArrayAdapter extends BaseAdapter implements ListAdapter {
     @Override
     public long getItemId(int pos) {
         return 0;
-        //just return 0 if your list items do not have an Id variable.
-        // list.get(pos).getId();
     }
 
     @Override
@@ -47,22 +46,18 @@ public class CustomArrayAdapter extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.custom_layout, null);
         }
 
-        //Handle TextView and display string from your list
         TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position));
-
-        //Handle buttons and add onClickListeners
         ImageButton deleteBtn = (ImageButton)view.findViewById(R.id.delete_btn);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
 
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
+                if (mContext instanceof AllExpenses) {
+                    ((AllExpenses)mContext).showAlertDialog(v.getContext(), position);
+                }
             }
         });
-
         return view;
     }
 }

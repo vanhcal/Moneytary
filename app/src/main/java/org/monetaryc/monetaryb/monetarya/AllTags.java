@@ -61,7 +61,9 @@ public class AllTags extends AppCompatActivity {
                     "where tags like '%" + tag + "%' and substr(date,6,2) == strftime('%m','now')", null);
             while(cursorB.moveToNext()) {
                 String amount = cursorB.getString(0);
-                allTagStatements.add("$" + amount + " on " + tag + " this month.");
+                if (amount != null) {
+                    allTagStatements.add("$" + amount + " on " + tag + " this month.");
+                }
             }
             cursorB.close();
         }
