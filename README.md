@@ -4,13 +4,17 @@ Moneytary is a personal finance app featuring Sally, your secretary who is happy
 
 Features:
 -- Responsive layout via 9-patch images
--- SQLite database that remembers prior purchases and tags
+-- SQL database that remembers prior purchases and tags
 -- SQL queries that return a summary of expenses
+-- SQL queries that return all recently used tags and all recent expenses
+-- Deletable expenses in ListView, which refreshes and repopulates
 -- Custom dialog calendar
--- Autofill populated by SQLite
+-- Custom ArrayAdapter handling ListView items
+-- Autofill tags populated by SQL
 -- Filled field validation and toasts confirming inputs 
 
 Please view:
 http://imgur.com/a/k9rZ7
+http://imgur.com/a/Fmhhb
 
 Moneytary is released on the Google Play store at: https://goo.gl/cSrSg6
